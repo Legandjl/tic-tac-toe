@@ -50,6 +50,15 @@ table {
 
     height:100vh;
     display: grid;
+    grid-template-rows: 100px 1fr;
+}
+
+#header {
+
+    justify-self: center;
+    align-self: end;
+    border-style: solid;
+    border-width: 2px;
 }
 
 #gameBoard {
