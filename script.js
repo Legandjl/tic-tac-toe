@@ -1,9 +1,18 @@
 let displayController = (() => {
 
+    let locked = false;
     let cells = document.querySelectorAll(".gameCell");
     let header = document.querySelector("#header");
 
-    //switch between players each round
+    let setLock = function(lock) {
+
+        locked = lock;
+    }
+
+    let getLock = function() {
+
+        return locked;
+    }
 
     let resetDisplay = function () {
 
@@ -11,6 +20,8 @@ let displayController = (() => {
 
             cell.innerText = "";
         })
+        setLock(false);
+        setHeader("Click a cell to begin - Player X will go first")
     }
 
     let boardClick = function (e) {
@@ -18,13 +29,14 @@ let displayController = (() => {
         let cell = e.target;
         console.log(e.target.dataset.row)
 
-        if (cell.innerText == "") {
+        if (cell.innerText == "" && getLock() == false) {
 
             gameBoard.cellClick(cell);
         }
     }
 
     let setHeader = function(text) {
+    
 
         header.innerText = text;
 
@@ -36,7 +48,8 @@ let displayController = (() => {
     return {
 
         resetDisplay,
-        setHeader
+        setHeader,
+        setLock
     }
 
 })();
@@ -44,8 +57,11 @@ let displayController = (() => {
 
 let gameBoard = function () {
 
+    let resetButton = document.querySelector("#reset");
+
     let currentPlayer = Player("X");
 
+    
     let board = [
         ["", "", ""],
         ["", "", ""],
@@ -64,15 +80,19 @@ let gameBoard = function () {
 
     }
 
+    resetButton.addEventListener("click",resetBoard)
+
     let cellClick = function (cell) {
 
-        cell.innerText = currentPlayer.getType();
-       
-        //possibly add at a specific index?
-        board[cell.dataset.row][cell.dataset.id] = currentPlayer.getType();       
+        cell.innerText = currentPlayer.getType();       
+        board[cell.dataset.row][cell.dataset.id] = currentPlayer.getType();   
+
         if(checkWinner()) {
 
-            resetBoard();
+           displayController.setHeader("player " + currentPlayer.getType() + " won, press the reset button to try again.")
+           displayController.setLock(true);
+           return;
+           
         }
 
         if (currentPlayer.getType() == "X") {

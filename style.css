@@ -2,19 +2,87 @@
 v2.0 | 20110126
 License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -22,64 +90,126 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
     list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
     content: '';
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
 #wrapper {
-
-    height:100vh;
+    font-family: 'Otomanopee One', sans-serif;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    grid-gap: 20px;
+    background-image: linear-gradient(to bottom, #e6e6f4, #e4e5f1, #e3e3ee, #e1e2ec, #e0e0e9);
 }
 
 #header {
 
     justify-self: center;
     align-self: end;
-    border-style: solid;
-    border-width: 2px;
+    font-size: 22px;
+    color: #635e60;
+
 }
 
 #gameBoard {
 
-    height:600px;
-    width:600px;
-    border-style: solid;
-    border-width: 2px;
-    align-self: center;
+    height: 400px;
+    width: 400px;
+    align-self: start;
     justify-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 18px;
+    border-radius: 10px;
 }
 
 .gameCell {
-
-    border-style: solid;
-    border-width: 2px;
     display: grid;
     align-content: center;
     justify-content: center;
-    cursor: pointer;
+    font-size: 64px;
 }
+
+.inner {
+
+    border-style: thin;
+    border-width: 1px;
+}
+
+button {
+
+    width: 120px;
+    height: 60px;
+    align-self: start;
+    justify-self: center;
+}
+
+/* I steal the fancy shadows from here 
+
+https://getcssscan.com/css-box-shadow-examples
+
+*/
+
+button,
+.gameCell {
+    background-color: #fff;
+    background-image: none;
+    background-position: 0 90%;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    color: #41403e;
+    cursor: pointer;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    font-family: 'Otomanopee One', sans-serif;
+    color: #635e60;
+}
+
+button:hover,
+.gameCell:hover {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
