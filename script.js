@@ -4,12 +4,12 @@ let displayController = (() => {
     let cells = document.querySelectorAll(".gameCell");
     let header = document.querySelector("#header");
 
-    let setLock = function(lock) {
+    let setLock = function (lock) {
 
         locked = lock;
     }
 
-    let getLock = function() {
+    let getLock = function () {
 
         return locked;
     }
@@ -20,6 +20,7 @@ let displayController = (() => {
 
             cell.innerText = "";
         })
+
         setLock(false);
         setHeader("Click a cell to begin - Player X will go first")
     }
@@ -27,7 +28,6 @@ let displayController = (() => {
     let boardClick = function (e) {
 
         let cell = e.target;
-        console.log(e.target.dataset.row)
 
         if (cell.innerText == "" && getLock() == false) {
 
@@ -35,11 +35,9 @@ let displayController = (() => {
         }
     }
 
-    let setHeader = function(text) {
-    
+    let setHeader = function (text) {
 
         header.innerText = text;
-
     }
 
     let board = document.querySelector("#gameBoard");
@@ -54,45 +52,29 @@ let displayController = (() => {
 
 })();
 
-
 let gameBoard = function () {
 
     let resetButton = document.querySelector("#reset");
 
     let currentPlayer = Player("X");
 
-    
     let board = [
         ["", "", ""],
         ["", "", ""],
         ["", "", ""]
     ];
 
-    let resetBoard = function () {
-
-        board = [
-            ["", "", ""],
-            ["", "", ""],
-            ["", "", ""]
-        ];
-
-        displayController.resetDisplay();
-
-    }
-
-    resetButton.addEventListener("click",resetBoard)
-
     let cellClick = function (cell) {
 
-        cell.innerText = currentPlayer.getType();       
-        board[cell.dataset.row][cell.dataset.id] = currentPlayer.getType();   
+        cell.innerText = currentPlayer.getType();
+        board[cell.dataset.row][cell.dataset.id] = currentPlayer.getType();
 
-        if(checkWinner()) {
+        if (checkWinner()) {
 
-           displayController.setHeader("player " + currentPlayer.getType() + " won, press the reset button to try again.")
-           displayController.setLock(true);
-           return;
-           
+            displayController.setHeader("player " + currentPlayer.getType() + " won, press the reset button to try again.")
+            displayController.setLock(true);
+            return;
+
         }
 
         if (currentPlayer.getType() == "X") {
@@ -110,13 +92,10 @@ let gameBoard = function () {
 
         let winner = false;
 
-        board.forEach((element, index) => {
-
-            console.log(index)
+        board.forEach((element) => {
 
             if ((element[0] == element[1] && element[0] == element[2]) && (element[0] != "")) {
 
-                console.log("winner " + element[0])
                 winner = true;
                 return;
             }
@@ -127,7 +106,6 @@ let gameBoard = function () {
 
             if ((element == board[1][index] && element == board[2][index]) && (element != "")) {
 
-                console.log("winner" + element)
                 winner = true;
                 return;
             }
@@ -138,7 +116,6 @@ let gameBoard = function () {
 
                     if (element == board[1][index + 1] && element == board[2][index + 2] && (element != "")) {
 
-                        console.log("winner!!" + element)
                         winner = true;
                         break;
                     }
@@ -147,7 +124,6 @@ let gameBoard = function () {
 
                         if (element == board[1][index - 1] && element == board[2][index - 2] && (element != "")) {
 
-                            console.log("winner!" + element)
                             winner = true;
                             break;
                         }
@@ -157,9 +133,22 @@ let gameBoard = function () {
         })
 
         return winner;
-
-    
     }
+
+    let resetBoard = function () {
+
+        board = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+
+        currentPlayer = Player("X");
+
+        displayController.resetDisplay();
+    }
+
+    resetButton.addEventListener("click", resetBoard)
 
     return {
 
